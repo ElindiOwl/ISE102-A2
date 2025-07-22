@@ -4,7 +4,7 @@ using Assessment__2.Enum;
 using Assessment__2.Model;
 using Assessment__2.Utility;
 
-namespace Assessment__2.UI;
+namespace Assessment__2.UI.Impl;
 
 public class MainMenuUi(
     IAuthenticationService authService,
@@ -65,19 +65,7 @@ public class MainMenuUi(
         
         while (true)
         {
-            if (_authService.IsLoginAttemptsExceeded())
-            {
-                var lockoutStatus = _authService.GetLockoutStatus();
-                
-                if (lockoutStatus != null)
-                {
-                    Console.WriteLine(lockoutStatus.Message);
-                    InputHelper.WaitForUser("Press any key to return to main menu...");
-                    return;
-                }
-            }
             string username = InputHelper.GetInput("Enter Username: ");
-            
             string password = InputHelper.GetInput("Enter Password: ");
             
             var result = _authService.Login(username, password);
@@ -162,13 +150,8 @@ public class MainMenuUi(
         if (_userService.RegisterUser(newUser))
         {
             Console.WriteLine("\nRegistration successful!");
-            
-            var testResult = _authService.Login(newUser.Username, newUser.Password);
-            
-            if (testResult.IsSuccess)
-            {
-                _userMenuUi.RunUserMenu();
-            }
+
+            _userMenuUi.RunUserMenu();
         }
         else
         {

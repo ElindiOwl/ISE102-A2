@@ -1,6 +1,6 @@
 using Assessment__2.Model;
 
-namespace Assessment__2.Repository;
+namespace Assessment__2.Repository.Impl;
 
 public class UserRepository : IUserRepository
 {

@@ -1,6 +1,6 @@
 using Assessment__2.Utility;
 
-namespace Assessment__2.UI;
+namespace Assessment__2.UI.Impl;
 
 public class UserMenuUi : IUserMenuUi
 {
@@ -44,4 +44,4 @@ public class UserMenuUi : IUserMenuUi
             }
         }
     }
-} 
+}

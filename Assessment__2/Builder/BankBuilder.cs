@@ -1,7 +1,7 @@
 using Assessment__2.Configuration;
-using Assessment__2.Repository;
-using Assessment__2.Service;
-using Assessment__2.UI;
+using Assessment__2.Repository.Impl;
+using Assessment__2.Service.Impl;
+using Assessment__2.UI.Impl;
 using Assessment__2.Validator;
 
 namespace Assessment__2.Builder;

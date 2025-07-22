@@ -2,7 +2,7 @@ using Assessment__2.Configuration;
 using Assessment__2.Model;
 using Assessment__2.Enum;
 
-namespace Assessment__2.Service;
+namespace Assessment__2.Service.Impl;
 
 public class AuthenticationService(
     IUserService userService, 

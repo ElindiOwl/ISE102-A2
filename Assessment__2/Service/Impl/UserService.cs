@@ -1,7 +1,7 @@
 using Assessment__2.Model;
 using Assessment__2.Repository;
 
-namespace Assessment__2.Service;
+namespace Assessment__2.Service.Impl;
 
 public class UserService(IUserRepository userRepository) : IUserService
 {

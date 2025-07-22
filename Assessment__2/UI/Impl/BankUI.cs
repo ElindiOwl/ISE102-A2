@@ -1,4 +1,4 @@
-namespace Assessment__2.UI;
+namespace Assessment__2.UI.Impl;
 
 public class BankUi(IMainMenuUi mainMenuUi) : IBankUi
 {
@@ -8,4 +8,4 @@ public class BankUi(IMainMenuUi mainMenuUi) : IBankUi
     {
         _mainMenuUi.RunMainMenu();
     }
-} 
+}
