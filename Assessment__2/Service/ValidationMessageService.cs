@@ -1,7 +1,7 @@
 using Assessment__2.Configuration;
 using Assessment__2.Enum;
 
-namespace Assessment__2.Services;
+namespace Assessment__2.Service;
 
 public class ValidationMessageService(ValidationConfig config) : IValidationMessageService
 {

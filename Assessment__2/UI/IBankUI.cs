@@ -1,10 +1,6 @@
-using Assessment__2.Models;
-
 namespace Assessment__2.UI;
 
-public interface IBankUI
+public interface IBankUi
 {
     void RunBankSystem();
-    void HandleLogin();
-    void HandleSignUp();
 } 

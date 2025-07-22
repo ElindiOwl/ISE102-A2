@@ -2,12 +2,12 @@ using Assessment__2.UI;
 
 namespace Assessment__2;
 
-public class Bank(IBankUI bankUI)
+public class Bank(IBankUi bankUi)
 {
-    private readonly IBankUI _bankUI = bankUI;
+    private readonly IBankUi _bankUi = bankUi;
     
     public void Run()
     {
-        _bankUI.RunBankSystem();
+        _bankUi.RunBankSystem();
     }
 } 

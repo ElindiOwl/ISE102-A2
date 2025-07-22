@@ -1,6 +1,6 @@
-using Assessment__2.Models;
+using Assessment__2.Model;
 
-namespace Assessment__2.Repositories;
+namespace Assessment__2.Repository;
 
 public class UserRepository : IUserRepository
 {
@@ -18,8 +18,8 @@ public class UserRepository : IUserRepository
 
     public User? GetByUsername(string username)
     {
-        return _users.FirstOrDefault(u => 
-            u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        return _users.FirstOrDefault(user => 
+            user.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
     }
 
     public bool AddUser(User user)
@@ -35,6 +35,6 @@ public class UserRepository : IUserRepository
 
     public bool IsUsernameExists(string username)
     {
-        return _users.Any(u => u.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
+        return _users.Any(user => user.Username.Equals(username, StringComparison.OrdinalIgnoreCase));
     }
 } 

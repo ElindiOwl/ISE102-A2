@@ -1,4 +1,4 @@
-namespace Assessment__2.Models;
+namespace Assessment__2.Model;
 
 public class User
 {

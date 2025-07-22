@@ -1,6 +1,6 @@
-using Assessment__2.Models;
+using Assessment__2.Model;
 
-namespace Assessment__2.Services;
+namespace Assessment__2.Service;
 
 public interface IUserService
 {
