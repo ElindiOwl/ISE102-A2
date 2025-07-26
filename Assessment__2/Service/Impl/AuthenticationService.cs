@@ -97,19 +97,4 @@ public class AuthenticationService(
         _loginAttempts = 0;
         _lockoutUntil = null;
     }
-
-    public AuthenticationResult? GetLockoutStatus()
-    {
-        if (_lockoutUntil.HasValue && DateTime.Now < _lockoutUntil.Value)
-        {
-            return new AuthenticationResult
-            {
-                IsSuccess = false,
-                Error = LoginError.MaxAttemptsExceeded,
-                RemainingAttempts = 0,
-                Message = _loginMessages.GetMessage(LoginError.MaxAttemptsExceeded)
-            };
-        }
-        return null;
-    }
 } 
