@@ -2,8 +2,10 @@ using Assessment__2.Utility;
 
 namespace Assessment__2.UI.Impl;
 
-public class UserMenuUi : IUserMenuUi
+public class UserMenuUi(InputHelper inputHelper) : IUserMenuUi
 {
+    private readonly InputHelper _inputHelper = inputHelper;
+    
     public void RunUserMenu()
     {
         bool exitUserMenu = false;
@@ -27,7 +29,7 @@ public class UserMenuUi : IUserMenuUi
                     Console.WriteLine($"{item.Key}. {item.Value.Description}");
                 }
                 
-                string choice = InputHelper.GetInput("Enter your choice: ");
+                string choice = _inputHelper.GetInput("Enter your choice: ");
                 
                 if (!userMenu.TryGetValue(choice, out var menuItem))
                 {

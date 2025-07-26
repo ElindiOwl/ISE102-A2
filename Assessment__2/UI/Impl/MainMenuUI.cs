@@ -11,7 +11,8 @@ public class MainMenuUi(
     IUserService userService,
     IValidationMessageService validationMessages,
     UserValidator userValidator,
-    IUserMenuUi userMenuUi
+    IUserMenuUi userMenuUi,
+    InputHelper inputHelper
 ) : IMainMenuUi
 {
     private readonly IAuthenticationService _authService = authService;
@@ -19,6 +20,7 @@ public class MainMenuUi(
     private readonly IValidationMessageService _validationMessages = validationMessages;
     private readonly UserValidator _userValidator = userValidator;
     private readonly IUserMenuUi _userMenuUi = userMenuUi;
+    private readonly InputHelper _inputHelper = inputHelper;
 
     public void RunMainMenu()
     {
@@ -41,7 +43,7 @@ public class MainMenuUi(
                     Console.WriteLine($"{item.Key}. {item.Value.Description}");
                 }
                 
-                string choice = InputHelper.GetInput("Enter your choice: ");
+                string choice = _inputHelper.GetInput("Enter your choice: ");
                 
                 if (!menu.TryGetValue(choice, out var menuItem))
                 {
@@ -65,8 +67,8 @@ public class MainMenuUi(
         
         while (true)
         {
-            string username = InputHelper.GetInput("Enter Username: ");
-            string password = InputHelper.GetInput("Enter Password: ");
+            string username = _inputHelper.GetInput("Enter Username: ");
+            string password = _inputHelper.GetInput("Enter Password: ");
             
             var result = _authService.Login(username, password);
             
@@ -90,7 +92,7 @@ public class MainMenuUi(
             }
             else if (result.Error == LoginError.MaxAttemptsExceeded)
             {
-                InputHelper.WaitForUser("Press any key to return to main menu...");
+                _inputHelper.WaitForUser("Press any key to return to main menu...");
                 return;
             }
         }
@@ -100,43 +102,30 @@ public class MainMenuUi(
     {
         Console.WriteLine("\n=== Sign Up ===");
         
-        string username;
+        string username = _inputHelper.GetValidString(
+            "Enter Username: ", 
+            _userValidator.ValidateUsername
+        );
         
-        while (true)
-        {
-            username = InputHelper.GetValidString(
-                "Enter Username: ", 
-                _userValidator.ValidateUsername
-                );
-            
-            if (!_userService.IsUsernameUnique(username))
-            {
-                Console.WriteLine(_validationMessages.GetMessage(ValidationError.UsernameExists));
-                continue;
-            }
-            break;
-        }
-        
-        string email = InputHelper.GetValidString(
+        string email = _inputHelper.GetValidString(
             "Enter Email: ", 
             _userValidator.ValidateEmail
-            );
+        );
         
-        int age = InputHelper.GetValidInt(
+        int age = _inputHelper.GetValidInt(
             "Enter Age: ",
-            _userValidator.ValidateAge,
-            _validationMessages.GetMessage(ValidationError.AgeInvalid)
-            );
+            _userValidator.ValidateAge
+        );
         
-        string phone = InputHelper.GetValidString(
+        string phone = _inputHelper.GetValidString(
             "Enter Phone: ", 
             _userValidator.ValidatePhone
-            );
+        );
         
-        string password = InputHelper.GetValidString(
+        string password = _inputHelper.GetValidString(
             "Enter Password: ", 
             _userValidator.ValidatePassword
-            );
+        );
         
         var newUser = new User
         {

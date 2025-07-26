@@ -5,10 +5,11 @@ using Assessment__2.Model;
 
 namespace Assessment__2.Validator;
 
-public class UserValidator(ValidationConfig config, IValidationMessageService validationMessages)
+public class UserValidator(ValidationConfig config, IValidationMessageService validationMessages, IUserService userService)
 {
     private readonly ValidationConfig _config = config;
     private readonly IValidationMessageService _validationMessages = validationMessages;
+    private readonly IUserService _userService = userService;
 
     public ValidationResult ValidateUsername(string username)
     {
@@ -16,7 +17,10 @@ public class UserValidator(ValidationConfig config, IValidationMessageService va
         {
             return ValidationResult.Failure(_validationMessages.GetMessage(ValidationError.UsernameRequired));
         }
-        
+        if (!_userService.IsUsernameUnique(username))
+        {
+            return ValidationResult.Failure(_validationMessages.GetMessage(ValidationError.UsernameExists));
+        }
         return ValidationResult.Success();
     }
 

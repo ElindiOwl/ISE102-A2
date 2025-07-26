@@ -1,11 +1,14 @@
 using Assessment__2.Model;
+using Assessment__2.Service;
+using Assessment__2.Enum;
 
 namespace Assessment__2.Utility;
 
-public static class InputHelper
+public class InputHelper(ISystemMessageService systemMessages)
 {
+    private readonly ISystemMessageService _systemMessages = systemMessages;
     
-    public static string GetValidString(string text, Func<string, ValidationResult> validate)
+    public string GetValidString(string text, Func<string, ValidationResult> validate)
     {
         while (true)
         {
@@ -20,14 +23,14 @@ public static class InputHelper
         }
     }
 
-    public static int GetValidInt(string text, Func<int, ValidationResult> validate, string invalidMsg)
+    public int GetValidInt(string text, Func<int, ValidationResult> validate)
     {
         while (true)
         {
             var input = GetInput(text);
             if (!int.TryParse(input, out int value))
             {
-                Console.WriteLine(invalidMsg);
+                Console.WriteLine(_systemMessages.GetMessage(SystemError.InvalidIntegerInput));
                 continue;
             }
             var result = validate(value);
@@ -40,13 +43,13 @@ public static class InputHelper
         }
     }
 
-    public static string GetInput(string text)
+    public string GetInput(string text)
     {
         Console.Write(text);
         return (Console.ReadLine() ?? string.Empty).Trim();
     }
 
-    public static void WaitForUser(string message)
+    public void WaitForUser(string message)
     {
         Console.WriteLine(message);
         Console.ReadKey();
