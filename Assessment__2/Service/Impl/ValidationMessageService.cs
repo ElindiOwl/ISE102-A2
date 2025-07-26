@@ -14,6 +14,8 @@ public class ValidationMessageService(ValidationConfig config) : IValidationMess
     {
         ValidationError.UsernameRequired => "Username is required",
         ValidationError.UsernameExists => "Username already exists. Please choose a different username",
+        // Returning message for username too short with minimum length
+        ValidationError.UsernameTooShort => $"Username must be at least {_config.MinUsernameLength} characters long",
         ValidationError.EmailRequired => "Email is required",
         ValidationError.AgeInvalid => "Age must be between 1 and 120",
         ValidationError.PhoneRequired => "Phone number is required",

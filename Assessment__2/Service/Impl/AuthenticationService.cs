@@ -60,20 +60,6 @@ public class AuthenticationService(
             };
         }
 
-        // Validating input credentials
-        if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
-        {
-            // Returning empty credentials error
-            return new AuthenticationResult
-            {
-                IsSuccess = false,
-                Error = LoginError.EmptyCredentials,
-                // Calculating remaining attempts
-                RemainingAttempts = _loginConfig.MaxLoginAttempts - _loginAttempts,
-                Message = _loginMessages.GetMessage(LoginError.EmptyCredentials)
-            };
-        }
-
         // Attempting to authenticate user
         var user = _userService.AuthenticateUser(username, password);
         

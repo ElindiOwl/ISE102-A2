@@ -5,5 +5,6 @@ public enum LoginError
 {
     InvalidCredentials,
     MaxAttemptsExceeded,
-    EmptyCredentials
+    UsernameEmpty,
+    PasswordEmpty
 }

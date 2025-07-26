@@ -23,6 +23,11 @@ public class UserValidator(ValidationConfig config, IValidationMessageService va
             // Returning failure with required message
             return ValidationResult.Failure(_validationMessages.GetMessage(ValidationError.UsernameRequired));
         }
+        // Checking if username meets minimum length requirement
+        if (username.Length < _config.MinUsernameLength)
+        {
+            return ValidationResult.Failure(_validationMessages.GetMessage(ValidationError.UsernameTooShort));
+        }
         // Checking if username already exists
         if (!_userService.IsUsernameUnique(username))
         {

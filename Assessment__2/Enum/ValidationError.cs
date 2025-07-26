@@ -5,6 +5,7 @@ public enum ValidationError
 {
     UsernameRequired,
     UsernameExists,
+    UsernameTooShort,
     EmailRequired,
     AgeInvalid,
     PhoneRequired,

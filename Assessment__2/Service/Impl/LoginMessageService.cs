@@ -15,7 +15,8 @@ public class LoginMessageService(LoginConfig config) : ILoginMessageService
         LoginError.InvalidCredentials => "Invalid username or password",
         // Returning message for exceeded attempts with lockout duration
         LoginError.MaxAttemptsExceeded => $"Maximum login attempts exceeded. Please try again after {_config.LockoutDurationMinutes} minutes.",
-        LoginError.EmptyCredentials => "Username and password cannot be empty",
+        LoginError.UsernameEmpty => "Username cannot be empty",
+        LoginError.PasswordEmpty => "Password cannot be empty",
         // Returning default message for unknown errors
         _ => "Unknown login error"
     };

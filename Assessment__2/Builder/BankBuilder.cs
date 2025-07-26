@@ -4,6 +4,7 @@ using Assessment__2.Service.Impl;
 using Assessment__2.UI.Impl;
 using Assessment__2.Utility;
 using Assessment__2.Validator;
+using Assessment__2.Controller;
 
 namespace Assessment__2.Builder;
 
@@ -23,11 +24,12 @@ public static class BankBuilder
         var systemMessages = new SystemMessageService();
         var inputHelper = new InputHelper(systemMessages);
         var userValidator = new UserValidator(validationConfig, validationMessages, userService);
+        var loginValidator = new LoginValidator(loginMessages);
         var userMenuUi = new UserMenuUi(inputHelper);
-        var mainMenuUi = new MainMenuUi(authService, userService, validationMessages, userValidator, userMenuUi, inputHelper);
+        var loginController = new LoginController(authService, userMenuUi, inputHelper, loginValidator);
+        var signUpController = new SignUpController(userService, validationMessages, userValidator, userMenuUi, inputHelper);
+        var mainMenuUi = new MainMenuUi(validationMessages, inputHelper, loginController, signUpController);
         var bankUi = new BankUi(mainMenuUi);
-        
-        // Returning new bank instance with UI
         return new Bank(bankUi);
     }
 } 
