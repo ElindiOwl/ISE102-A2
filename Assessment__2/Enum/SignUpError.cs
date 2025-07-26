@@ -1,7 +1,7 @@
 namespace Assessment__2.Enum;
 
-// Declaring enumeration for validation error types
-public enum ValidationError
+// Declaring enumeration for sign-up error types
+public enum SignUpError
 {
     UsernameRequired,
     UsernameExists,
@@ -11,6 +11,5 @@ public enum ValidationError
     PhoneRequired,
     PasswordRequired,
     PasswordTooShort,
-    RegistrationFailed,
-    UnexpectedError
-}
+    RegistrationFailed
+} 

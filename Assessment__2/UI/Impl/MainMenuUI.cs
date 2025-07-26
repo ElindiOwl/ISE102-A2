@@ -7,14 +7,14 @@ namespace Assessment__2.UI.Impl;
 
 // Declaring class implementing main menu UI with constructor injection
 public class MainMenuUi(
-    IValidationMessageService validationMessages,
+    ISignUpMessageService signUpMessages,
     InputHelper inputHelper,
     LoginController loginController,
     SignUpController signUpController
 ) : IMainMenuUi
 {
     // Declaring private field for logic
-    private readonly IValidationMessageService _validationMessages = validationMessages;
+    private readonly ISignUpMessageService _signUpMessages = signUpMessages;
     private readonly InputHelper _inputHelper = inputHelper;
     private readonly LoginController _loginController = loginController;
     private readonly SignUpController _signUpController = signUpController;
@@ -63,7 +63,7 @@ public class MainMenuUi(
             catch (Exception exception)
             {
                 // Displaying unexpected error message for user 
-                Console.WriteLine(_validationMessages.GetMessage(ValidationError.UnexpectedError));
+                Console.WriteLine(_signUpMessages.GetMessage(SignUpError.RegistrationFailed));
                 // Logging exception details for developer
                 Console.Error.WriteLine(exception);
             }

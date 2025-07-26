@@ -15,20 +15,20 @@ public static class BankBuilder
     public static Bank CreateDefault()
     {
         var loginConfig = new LoginConfig();
-        var validationConfig = new ValidationConfig();
+        var validationConfig = new SignUpConfig();
         var userRepository = new UserRepository();
         var userService = new UserService(userRepository);
         var loginMessages = new LoginMessageService(loginConfig);
         var authService = new AuthenticationService(userService, loginConfig, loginMessages);
-        var validationMessages = new ValidationMessageService(validationConfig);
+        var signUpMessages = new SignUpMessageService(validationConfig);
         var systemMessages = new SystemMessageService();
         var inputHelper = new InputHelper(systemMessages);
-        var userValidator = new UserValidator(validationConfig, validationMessages, userService);
-        var loginValidator = new LoginValidator(loginMessages);
+        var signUpValidator = new SignUpValidator(validationConfig, signUpMessages, userService);
         var userMenuUi = new UserMenuUi(inputHelper);
+        var loginValidator = new LoginValidator(loginMessages);
         var loginController = new LoginController(authService, userMenuUi, inputHelper, loginValidator);
-        var signUpController = new SignUpController(userService, validationMessages, userValidator, userMenuUi, inputHelper);
-        var mainMenuUi = new MainMenuUi(validationMessages, inputHelper, loginController, signUpController);
+        var signUpController = new SignUpController(userService, signUpMessages, signUpValidator, userMenuUi, inputHelper);
+        var mainMenuUi = new MainMenuUi(signUpMessages, inputHelper, loginController, signUpController);
         var bankUi = new BankUi(mainMenuUi);
         return new Bank(bankUi);
     }

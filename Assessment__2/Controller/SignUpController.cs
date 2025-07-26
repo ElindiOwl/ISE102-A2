@@ -10,16 +10,16 @@ namespace Assessment__2.Controller;
 // Declaring controller for sign-up business logic with primary constructor
 public class SignUpController(
     IUserService userService,
-    IValidationMessageService validationMessages,
-    UserValidator userValidator,
+    ISignUpMessageService signUpMessages,
+    SignUpValidator signUpValidator,
     IUserMenuUi userMenuUi,
     InputHelper inputHelper
 )
 {
     // Declaring private fields for logic
     private readonly IUserService _userService = userService;
-    private readonly IValidationMessageService _validationMessages = validationMessages;
-    private readonly UserValidator _userValidator = userValidator;
+    private readonly ISignUpMessageService _signUpMessages = signUpMessages;
+    private readonly SignUpValidator _signUpValidator = signUpValidator;
     private readonly IUserMenuUi _userMenuUi = userMenuUi;
     private readonly InputHelper _inputHelper = inputHelper;
 
@@ -28,37 +28,31 @@ public class SignUpController(
     {
         // Displaying sign up header
         Console.WriteLine("\n=== Sign Up ===");
-        
         // Getting validated username input
         string username = _inputHelper.GetValidString(
             "Enter Username: ",
-            _userValidator.ValidateUsername
+            _signUpValidator.ValidateUsername
         );
-        
         // Getting validated email input
         string email = _inputHelper.GetValidString(
             "Enter Email: ",
-            _userValidator.ValidateEmail
+            _signUpValidator.ValidateEmail
         );
-        
         // Getting validated age input
         int age = _inputHelper.GetValidInt(
             "Enter Age: ",
-            _userValidator.ValidateAge
+            _signUpValidator.ValidateAge
         );
-        
         // Getting validated phone input
         string phone = _inputHelper.GetValidString(
             "Enter Phone: ",
-            _userValidator.ValidatePhone
+            _signUpValidator.ValidatePhone
         );
-        
         // Getting validated password input
         string password = _inputHelper.GetValidString(
             "Enter Password: ",
-            _userValidator.ValidatePassword
+            _signUpValidator.ValidatePassword
         );
-        
         // Creating new user object
         var newUser = new User
         {
@@ -68,7 +62,6 @@ public class SignUpController(
             Phone = phone,
             Password = password
         };
-        
         // Attempting user registration
         if (_userService.RegisterUser(newUser))
         {
@@ -77,7 +70,7 @@ public class SignUpController(
         }
         else
         {
-            Console.WriteLine(_validationMessages.GetMessage(ValidationError.RegistrationFailed));
+            Console.WriteLine(_signUpMessages.GetMessage(SignUpError.RegistrationFailed));
         }
     }
 } 
