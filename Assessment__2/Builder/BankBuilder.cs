@@ -7,8 +7,10 @@ using Assessment__2.Validator;
 
 namespace Assessment__2.Builder;
 
+// Declaring static class for building bank instances
 public static class BankBuilder
 {
+    // Creating default bank configuration
     public static Bank CreateDefault()
     {
         var loginConfig = new LoginConfig();
@@ -24,6 +26,8 @@ public static class BankBuilder
         var userMenuUi = new UserMenuUi(inputHelper);
         var mainMenuUi = new MainMenuUi(authService, userService, validationMessages, userValidator, userMenuUi, inputHelper);
         var bankUi = new BankUi(mainMenuUi);
+        
+        // Returning new bank instance with UI
         return new Bank(bankUi);
     }
 } 

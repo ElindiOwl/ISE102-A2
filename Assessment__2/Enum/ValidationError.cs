@@ -1,5 +1,6 @@
 namespace Assessment__2.Enum;
 
+// Declaring enumeration for validation error types
 public enum ValidationError
 {
     UsernameRequired,
