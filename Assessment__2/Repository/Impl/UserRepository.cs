@@ -1,3 +1,5 @@
+// Daniil Abkhalimov, studentId: A00177578
+
 using Assessment__2.Model;
 
 namespace Assessment__2.Repository.Impl;

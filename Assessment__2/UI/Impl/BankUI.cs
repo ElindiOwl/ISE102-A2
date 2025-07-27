@@ -1,3 +1,5 @@
+// Daniil Abkhalimov, studentId: A00177578
+
 namespace Assessment__2.UI.Impl;
 
 // Declaring class implementing bank UI with constructor injection

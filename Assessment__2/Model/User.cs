@@ -1,3 +1,5 @@
+// Daniil Abkhalimov, studentId: A00177578
+
 namespace Assessment__2.Model;
 
 // Declaring class for user data model

@@ -1,3 +1,5 @@
+// Daniil Abkhalimov, studentId: A00177578
+
 using Assessment__2.Configuration;
 using Assessment__2.Repository.Impl;
 using Assessment__2.Service.Impl;
