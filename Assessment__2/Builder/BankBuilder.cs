@@ -24,11 +24,12 @@ public static class BankBuilder
         var systemMessages = new SystemMessageService();
         var inputHelper = new InputHelper(systemMessages);
         var signUpValidator = new SignUpValidator(validationConfig, signUpMessages, userService);
-        var userMenuUi = new UserMenuUi(inputHelper);
+        var menuHelper = new MenuHelper(inputHelper);
+        var userMenuUi = new UserMenuUi(menuHelper);
         var loginValidator = new LoginValidator(loginMessages);
         var loginController = new LoginController(authService, userMenuUi, inputHelper, loginValidator);
         var signUpController = new SignUpController(userService, signUpMessages, signUpValidator, userMenuUi, inputHelper);
-        var mainMenuUi = new MainMenuUi(signUpMessages, inputHelper, loginController, signUpController);
+        var mainMenuUi = new MainMenuUi(signUpMessages, loginController, signUpController, menuHelper);
         var bankUi = new BankUi(mainMenuUi);
         return new Bank(bankUi);
     }
